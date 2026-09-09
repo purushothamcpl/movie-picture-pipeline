@@ -58,7 +58,9 @@ jobs:
 
       - name: Run tests
         working-directory: starter
-        run: pipenv --chdir backend run pytest -v
+        run: pipenv run pytest -v
+        env:
+          PIPENV_PIPFILE: ${{ github.workspace }}/starter/backend/Pipfile
 
   build:
     name: Backend Docker Build
