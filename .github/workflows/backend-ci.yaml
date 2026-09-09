@@ -61,6 +61,8 @@ jobs:
 
       - name: Run tests
         run: pipenv run test
+        env:
+          PYTHONPATH: ${{ github.workspace }}/starter
 
   build:
     name: Backend Docker Build
