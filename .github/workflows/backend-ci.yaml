@@ -40,6 +40,10 @@ jobs:
     name: Backend Tests
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: starter/backend
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,18 +57,17 @@ jobs:
         run: pip install pipenv
 
       - name: Install dependencies
-        working-directory: starter/backend
         run: pipenv install --dev
 
       - name: Run tests
-        working-directory: starter
-        run: pipenv run pytest -v
+        run: pipenv run test
         env:
-          PIPENV_PIPFILE: ${{ github.workspace }}/starter/backend/Pipfile
+          PYTHONPATH: ${{ github.workspace }}/starter
 
   build:
     name: Backend Docker Build
     runs-on: ubuntu-latest
+
     needs:
       - lint
       - test
